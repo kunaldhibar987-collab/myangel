@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Angel from Kunal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #fff5f7; font-family: 'Poppins', sans-serif; }
+        
+        /* FIRST SCREEN */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #ffafbd, #ffc3a0);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 1000; color: white; text-align: center;
+        }
+        #overlay h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; margin-bottom: 20px; }
+        .open-btn {
+            padding: 15px 40px; font-size: 1.4rem; background: white; color: #ff4d6d;
+            border: none; border-radius: 50px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s;
+        }
+
+        /* SECOND SCREEN (PROPOSAL) */
+        #main-content {
+            display: none; height: 100vh; width: 100%; justify-content: center; align-items: center;
+            flex-direction: column;
+        }
+        .container {
+            background: white; padding: 2.5rem; border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(255, 182, 193, 0.5);
+            text-align: center; max-width: 380px; border: 2px dashed #ff4d6d;
+        }
+        .propose-gif { width: 220px; border-radius: 20px; margin-bottom: 15px; }
+        h1#question { font-family: 'Dancing Script', cursive; color: #c9184a; font-size: 2.5rem; margin: 15px 0; }
+        
+        .buttons { display: flex; justify-content: center; gap: 20px; margin-top: 10px; min-height: 50px; }
+        .btn { padding: 12px 30px; border-radius: 50px; border: none; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s; }
+        #yesBtn { background: #ff4d6d; color: white; }
+        #noBtn { background: #594d5b; color: white; position: relative; }
+
+        /* SHAYARI BOX */
+        #shayari-box {
+            display: none; margin-top: 20px; font-family: 'Dancing Script', cursive;
+            color: #d32f2f; font-size: 1.4rem; line-height: 1.4;
+        }
+
+        .heart { position: absolute; color: #ff4d6d; animation: fall linear forwards; pointer-events: none; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        .sig { font-family: 'Great Vibes', cursive; color: #ff4d6d; font-size: 1.8rem; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <h1>My Dearest Angel...</h1>
+        <button class="open-btn" onclick="startLove()">Open with Love ❤️</button>
+    </div>
+
+    <div id="main-content">
+        <div class="container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp2ZXB6Z3R6ZndqZ3R6ZndqZ3R6ZndqZ3R6ZndqZ3R6ZndqJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/6m7pU6kXn1hY9S9B8Z/giphy.gif" class="propose-gif">
+            <h1 id="question">Angel, Will you be my Valentine? ❤️</h1>
+            
+            <div id="btnWrapper" class="buttons">
+                <button id="yesBtn" class="btn" onclick="celebrate()">Yes!</button>
+                <button id="noBtn" class="btn" onmouseover="moveNo()">No</button>
+            </div>
+
+            <div id="shayari-box">
+                "Teri muskurahat meri pehchan hai,<br>
+                Teri khushi hi meri jaan hai...<br>
+                Tu hi mera sukoon hai Angel,<br>
+                Tu hi mera jahan hai!" ❤️
+            </div>
+
+            <div class="sig">- Your Kunal</div>
+        </div>
+    </div>
+
+    <script>
+        function startLove() {
+            // Remove everything related to the overlay
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+            
+            // Start heart rain
+            setInterval(createHeart, 600);
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('question').innerHTML = "I Knew It! I Love You! ❤️";
+            document.getElementById('btnWrapper').style.display = 'none';
+            document.getElementById('shayari-box').style.display = 'block';
+            
+            // Blast of hearts
+            for(let i=0; i<60; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-20px';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+    </script>
+</body>
+</html>
