@@ -13,18 +13,7 @@
         .open-btn { padding: 15px 40px; font-size: 1.4rem; background: white; color: #ff4d6d; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         
         .container { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; position: relative; }
-        
-        /* Naya Question Box Style */
-        .question-box { 
-            background: rgba(255, 255, 255, 0.9); 
-            padding: 40px 30px; 
-            border-radius: 30px; 
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); 
-            border: 2px solid #fff;
-            z-index: 10;
-            max-width: 400px;
-        }
-
+        .question-box { background: rgba(255, 255, 255, 0.9); padding: 40px 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); border: 2px solid #fff; z-index: 10; max-width: 400px; }
         .question { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #d63384; margin-bottom: 30px; }
         
         .btn-group { display: flex; gap: 20px; justify-content: center; position: relative; }
@@ -33,8 +22,26 @@
         #no-btn { background-color: #f8f9fa; color: #333; position: relative; }
         
         #success-container { display: none; flex-direction: column; align-items: center; z-index: 10; }
-        #success-msg { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #ff4d6d; margin-bottom: 20px; }
-        .shayari-box { background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 20px; border: 2px dashed #ff4d6d; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2); max-width: 320px; line-height: 1.8; color: #444; font-style: italic; font-size: 1.2rem; white-space: pre-line; }
+        
+        /* Moving Animation for I Love You Angel */
+        #success-msg { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: 4rem; 
+            color: #ff4d6d; 
+            margin-bottom: 20px; 
+            text-shadow: 3px 3px 10px rgba(255, 77, 109, 0.4);
+            display: inline-block;
+            animation: floatMove 3s ease-in-out infinite;
+        }
+
+        @keyframes floatMove {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+        
+        .shayari-box { background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 20px; border: 2px dashed #ff4d6d; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2); max-width: 320px; line-height: 1.8; color: #444; font-style: italic; font-size: 1.2rem; white-space: pre-line; position: relative; }
+        .from-name { display: block; margin-top: 15px; font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: #ff4d6d; text-align: right; font-weight: bold; }
 
         .falling-item { position: absolute; top: -50px; user-select: none; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
@@ -58,19 +65,19 @@
     </div>
 
     <div id="success-container">
-        <div id="success-msg">I Love You Forever! ❤️</div>
+        <div id="success-msg">I Love You Angel! ❤️</div>
         <div class="shayari-box">
             "Teri muskurahat meri pehchan hai,
             Teri khushi hi meri jaan hai...
             Tu hi mera sukoon hai Angel,
             Tu hi mera jahan hai!" ❤️
+            <span class="from-name">- From Kunal ❤️</span>
         </div>
     </div>
 </div>
 
 <script>
     let clickCount = 0;
-
     function createFallingItem() {
         const items = ['❤️', '🌸', '🌹', '🌻', '🌷', '💖', '🌼'];
         const item = document.createElement('div');
@@ -82,13 +89,11 @@
         document.body.appendChild(item);
         setTimeout(() => { item.remove(); }, 5000);
     }
-
     function startSurprise() {
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('main-container').style.display = 'flex';
         setInterval(createFallingItem, 150);
     }
-
     const noBtn = document.getElementById('no-btn');
     const yesBtn = document.getElementById('yes-btn');
     const quizPart = document.getElementById('quiz-part');
@@ -103,23 +108,16 @@
             noBtn.style.top = y + 'px';
         }
     });
-
     noBtn.addEventListener('click', (e) => {
         clickCount++;
-        if (clickCount === 1) {
-            alert("Try again! 😜");
-        } else if (clickCount === 2) {
-            alert("Still No? Think again! 🤨");
-        } else {
-            noBtn.style.display = 'none';
-        }
+        if (clickCount === 1) { alert("Try again! 😜"); }
+        else if (clickCount === 2) { alert("Still No? Think again! 🤨"); }
+        else { noBtn.style.display = 'none'; }
     });
-
     yesBtn.addEventListener('click', () => {
         quizPart.style.display = 'none';
         successContainer.style.display = 'flex';
     });
 </script>
-
 </body>
 </html>
