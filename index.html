@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Surprise for Angel</title>
+    <title>Special Surprise</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #fff5f7; font-family: 'Poppins', sans-serif; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #ffafbd, #ffc3a0); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; color: white; text-align: center; padding: 20px; }
-        #overlay h1 { font-family: 'Great Vibes', cursive; font-size: 3.2rem; margin-bottom: 10px; }
+        #overlay h1 { font-family: 'Great Vibes', cursive; font-size: 3.2rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .sub-text { font-size: 1.2rem; margin-bottom: 30px; font-style: italic; opacity: 0.9; }
         .open-btn { padding: 15px 40px; font-size: 1.4rem; background: white; color: #ff4d6d; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         
-        .container { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 10px; position: relative; }
-        .question-box { background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); z-index: 10; width: 85%; max-width: 400px; }
-        .question { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #d63384; margin-bottom: 25px; }
+        .container { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; position: relative; }
+        .question-box { background: rgba(255, 255, 255, 0.9); padding: 40px 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); border: 2px solid #fff; z-index: 10; max-width: 400px; }
+        .question { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #d63384; margin-bottom: 30px; }
         
-        #yes-btn { background-color: #ff4d6d; color: white; padding: 12px 35px; border-radius: 50px; border:none; font-weight:bold; cursor:pointer; }
-        #no-btn { background-color: #f8f9fa; padding: 12px 35px; border-radius: 50px; border:none; cursor:pointer; }
-
-        #success-container { display: none; flex-direction: column; align-items: center; z-index: 10; width: 100%; }
-
-        /* BADA HEART PHOTO */
-        .heart-wrapper {
-            position: relative;
-            width: 320px; /* Size bada kiya */
-            height: 300px;
-            margin: 10px 0;
-            filter: drop-shadow(0 10px 15px rgba(255, 77, 109, 0.4));
-            animation: heartBeat 1.5s infinite;
+        .btn-group { display: flex; gap: 20px; justify-content: center; position: relative; }
+        .btn { padding: 12px 35px; font-size: 1.2rem; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        #yes-btn { background-color: #ff4d6d; color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
+        #no-btn { background-color: #f8f9fa; color: #333; position: relative; }
+        
+        #success-container { display: none; flex-direction: column; align-items: center; z-index: 10; overflow-y: auto; max-height: 90vh; }
+        
+        /* Photo Frame Styling */
+        .photo-frame {
+            width: 220px;
+            height: 220px;
+            border: 8px solid white;
+            border-radius: 50%; /* Circle shape */
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: heartBeat 2s infinite;
         }
-
-        .final-heart {
+        .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center; /* Face center mein rakhega */
-            clip-path: url(#heart-clip);
-            border: 5px solid white;
         }
 
         @keyframes heartBeat {
@@ -45,77 +46,103 @@
             100% { transform: scale(1); }
         }
 
-        #success-msg { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ff4d6d; margin: 5px 0; }
+        #success-msg { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: 3.5rem; 
+            color: #ff4d6d; 
+            margin-bottom: 10px; 
+            text-shadow: 3px 3px 10px rgba(255, 77, 109, 0.4);
+            animation: floatMove 3s ease-in-out infinite;
+        }
+
+        @keyframes floatMove {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
         
-        .shayari-box { background: white; padding: 15px; border-radius: 20px; border: 2px dashed #ff4d6d; width: 80%; max-width: 320px; font-style: italic; font-size: 1.1rem; color: #444; }
-        .from-name { display: block; margin-top: 5px; font-family: 'Great Vibes', cursive; font-size: 1.6rem; color: #ff4d6d; text-align: right; }
+        .shayari-box { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 20px; border: 2px dashed #ff4d6d; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2); max-width: 320px; line-height: 1.6; color: #444; font-style: italic; font-size: 1.1rem; white-space: pre-line; }
+        .from-name { display: block; margin-top: 10px; font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: #ff4d6d; text-align: right; }
 
         .falling-item { position: absolute; top: -50px; user-select: none; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-        .svg-defs { position: absolute; width: 0; height: 0; }
     </style>
 </head>
 <body>
 
-<svg class="svg-defs">
-  <defs>
-    <clipPath id="heart-clip" clipPathUnits="objectBoundingBox">
-      <path d="M0.5,0.9 C0.5,0.9,0,0.6,0,0.32 C0,0.15,0.15,0,0.32,0 C0.42,0,0.48,0.05,0.5,0.1 C0.52,0.05,0.58,0,0.68,0 C0.85,0,1,0.15,1,0.32 C1,0.6,0.5,0.9,0.5,0.9"></path>
-    </clipPath>
-  </defs>
-</svg>
-
 <div id="overlay">
-    <h1>Kunal's Surprise</h1>
-    <button class="open-btn" onclick="startSurprise()">Open ❤️</button>
+    <h1>Kunal's Special Surprise for Angel</h1>
+    <div class="sub-text">"Every moment with you is a gift."</div>
+    <button class="open-btn" onclick="startSurprise()">Open with Love ❤️</button>
 </div>
 
 <div class="container" id="main-container">
     <div id="quiz-part" class="question-box">
         <div class="question">Angel, will you be my Valentine? ❤️</div>
-        <button id="yes-btn">Yes</button>
-        <button id="no-btn">No</button>
+        <div class="btn-group">
+            <button class="btn" id="yes-btn">Yes</button>
+            <button class="btn" id="no-btn">No</button>
+        </div>
     </div>
 
     <div id="success-container">
         <div id="success-msg">I Love You Angel! ❤️</div>
         
-        <div class="heart-wrapper">
-            <img src="angel.jpeg" alt="Angel" class="final-heart">
+        <div class="photo-frame">
+            <img src="angel.jpeg" alt="Angel and Kunal">
         </div>
 
         <div class="shayari-box">
             "Teri muskurahat meri pehchan hai,
-            Teri khushi hi meri jaan hai..."
+            Teri khushi hi meri jaan hai...
+            Tu hi mera sukoon hai Angel,
+            Tu hi mera jahan hai!" ❤️
             <span class="from-name">- From Kunal ❤️</span>
         </div>
     </div>
 </div>
 
 <script>
+    let clickCount = 0;
     function createFallingItem() {
-        const items = ['❤️', '💖', '🌹'];
+        const items = ['❤️', '🌸', '🌹', '🌻', '🌷', '💖', '🌼'];
         const item = document.createElement('div');
         item.classList.add('falling-item');
         item.innerHTML = items[Math.floor(Math.random() * items.length)];
         item.style.left = Math.random() * 100 + 'vw';
-        item.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        item.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        item.style.animationDuration = (Math.random() * 3 + 2) + 's';
         document.body.appendChild(item);
-        setTimeout(() => item.remove(), 5000);
+        setTimeout(() => { item.remove(); }, 5000);
     }
     function startSurprise() {
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('main-container').style.display = 'flex';
-        setInterval(createFallingItem, 200);
+        setInterval(createFallingItem, 150);
     }
-    document.getElementById('no-btn').addEventListener('mouseover', function() {
-        this.style.position = 'absolute';
-        this.style.top = Math.random() * 80 + '%';
-        this.style.left = Math.random() * 80 + '%';
+    const noBtn = document.getElementById('no-btn');
+    const yesBtn = document.getElementById('yes-btn');
+    const quizPart = document.getElementById('quiz-part');
+    const successContainer = document.getElementById('success-container');
+
+    noBtn.addEventListener('mouseover', () => {
+        if (window.innerWidth > 768) {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
     });
-    document.getElementById('yes-btn').addEventListener('click', function() {
-        document.getElementById('quiz-part').style.display = 'none';
-        document.getElementById('success-container').style.display = 'flex';
+    noBtn.addEventListener('click', (e) => {
+        clickCount++;
+        if (clickCount === 1) { alert("Try again! 😜"); }
+        else if (clickCount === 2) { alert("Still No? Think again! 🤨"); }
+        else { noBtn.style.display = 'none'; }
+    });
+    yesBtn.addEventListener('click', () => {
+        quizPart.style.display = 'none';
+        successContainer.style.display = 'flex';
     });
 </script>
 </body>
