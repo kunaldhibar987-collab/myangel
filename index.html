@@ -21,27 +21,48 @@
         #yes-btn { background-color: #ff4d6d; color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
         #no-btn { background-color: #f8f9fa; color: #333; position: relative; }
         
-        #success-container { display: none; flex-direction: column; align-items: center; z-index: 10; }
+        #success-container { display: none; flex-direction: column; align-items: center; z-index: 10; overflow-y: auto; max-height: 90vh; }
         
-        /* Moving Animation for I Love You Angel */
+        /* Photo Frame Styling */
+        .photo-frame {
+            width: 220px;
+            height: 220px;
+            border: 8px solid white;
+            border-radius: 50%; /* Circle shape */
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: heartBeat 2s infinite;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         #success-msg { 
             font-family: 'Great Vibes', cursive; 
-            font-size: 4rem; 
+            font-size: 3.5rem; 
             color: #ff4d6d; 
-            margin-bottom: 20px; 
+            margin-bottom: 10px; 
             text-shadow: 3px 3px 10px rgba(255, 77, 109, 0.4);
-            display: inline-block;
             animation: floatMove 3s ease-in-out infinite;
         }
 
         @keyframes floatMove {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-20px) scale(1.1); }
-            100% { transform: translateY(0px) scale(1); }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
         
-        .shayari-box { background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 20px; border: 2px dashed #ff4d6d; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2); max-width: 320px; line-height: 1.8; color: #444; font-style: italic; font-size: 1.2rem; white-space: pre-line; position: relative; }
-        .from-name { display: block; margin-top: 15px; font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: #ff4d6d; text-align: right; font-weight: bold; }
+        .shayari-box { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 20px; border: 2px dashed #ff4d6d; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2); max-width: 320px; line-height: 1.6; color: #444; font-style: italic; font-size: 1.1rem; white-space: pre-line; }
+        .from-name { display: block; margin-top: 10px; font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: #ff4d6d; text-align: right; }
 
         .falling-item { position: absolute; top: -50px; user-select: none; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
@@ -66,6 +87,11 @@
 
     <div id="success-container">
         <div id="success-msg">I Love You Angel! ❤️</div>
+        
+        <div class="photo-frame">
+            <img src="angel.jpeg" alt="Angel and Kunal">
+        </div>
+
         <div class="shayari-box">
             "Teri muskurahat meri pehchan hai,
             Teri khushi hi meri jaan hai...
